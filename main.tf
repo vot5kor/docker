@@ -4,12 +4,12 @@ resource "aws_instance" "This"{
     vpc_security_group_ids  = [aws_security_group.allow_docker.id]
    
     #20gb not enough
-/*     root_block_device {
+    root_block_device {
         volume_size = 50 # set root  volume size to 50
         volume_type = "gp3" # use gp3 for better performance(optional)
 
-    } */
-    # user_data = file(dockershell.sh)
+    }
+    user_data = file("docker.sh")
 
     tags = {
       Name = "docker"
