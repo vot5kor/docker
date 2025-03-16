@@ -1,5 +1,6 @@
 resource "aws_instance" "This"{
     ami     = "ami-09c813fb71547fc4f"
+  #subnet_id = "subnet-06c3c1027a6e3b1ea"
     instance_type = "t3.micro"
     vpc_security_group_ids  = [aws_security_group.allow_docker.id]
    
