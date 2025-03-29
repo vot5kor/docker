@@ -1,0 +1,38 @@
+- name: Create Ec2 instance
+  connection: Local
+  hosts: Local
+  become: yes
+  vars:
+    subnet_id: subnet-042e14877f4764239
+    sg_id: sg-00c5900657b037b30
+    instance_type: t3.micro
+    image_id: ami-09c813fb71547fc4f
+    region: us-east-1
+    instances:
+    - mysql
+    - backend
+    - frontend
+   
+  tasks:
+  - name: install AWS python libraries
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      executable: pip3.9
+    loop:
+    - boto3
+    - botocore
+
+  - name: create Ec2 instances
+    amazon.aws.ec2_instance:
+      name: "{{ item }}"
+      subnet_id: "{{ subnet_id }}"
+      security_group: "{{ sg_id }}"
+      instance_type: "{{ instance_type }}"
+      image_id: "{{ image_id }}"
+      region: "{{ region }}"
+    loop: "{{ instances }}"
+    register: ec2_info
+    
+  - name: print ec2_info output
+    ansible.builtin.debug:
+      msg: "output: {{ ec2_info }}" 
