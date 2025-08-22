@@ -5,12 +5,12 @@ resource "aws_instance" "This"{
     vpc_security_group_ids  = [aws_security_group.allow_docker.id]
    
     #20gb not enough
-    root_block_device {
-        volume_size = 50 # set root  volume size to 50
-        volume_type = "gp3" # use gp3 for better performance(optional)
+    # root_block_device {
+    #     volume_size = 50 # set root  volume size to 50
+    #     volume_type = "gp3" # use gp3 for better performance(optional)
 
-    }
-    user_data = file("docker.sh")
+    # }
+    # user_data = file("docker.sh")
 
     tags = {
       Name = "docker"
@@ -19,7 +19,7 @@ resource "aws_instance" "This"{
 
 
 resource "aws_security_group" "allow_docker" {
-  name              = "allow_docker001"
+  name              = "allow_docker009"
   description       = "allow tls inbound trafic and all outbound traffic"
   # vpc_id            = "vpc-035f44c2894cbe3b3"
  ingress {
