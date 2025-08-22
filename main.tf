@@ -19,7 +19,7 @@ resource "aws_instance" "This"{
 
 
 resource "aws_security_group" "allow_docker" {
-  name              = "allow_docker009"
+  name              = "allow_docker001"
   description       = "allow tls inbound trafic and all outbound traffic"
   # vpc_id            = "vpc-035f44c2894cbe3b3"
  ingress {
